@@ -24,15 +24,6 @@ class Service:
         self.options = {"exclusive": True, "auto_delete": True} if isSingle else {}
         super(Service, self).__init__()
 
-    def __del__(self):
-        if self.channel:
-            self.connection.close()
-        if self.channel:
-            self.channel.close()
-        deleter = getattr(super(Service, self), "__del__", None)
-        if callable(deleter):
-            deleter()
-
     def connect(self):
         self.logger.info(f"Try to connect to {self.address}")
         self.connection = pika.BlockingConnection(pika.URLParameters(self.address))
@@ -42,16 +33,16 @@ class Service:
         self.logger.info(f"waiting for messages on {self.queue_name}")
         return self
 
-    def listen(self, callback):
-        self.channel.basic_consume(self.__get_callback(callback), queue=self.queue_name)
+    def listen(self, callback, **kwargs):
+        self.channel.basic_consume(self.__get_callback(callback), queue=self.queue_name, **kwargs)
         self.channel.start_consuming()
 
-    def bind_to_exchange(self, exchange, routing_key):
-        self.channel.queue_bind(queue=self.queue_name, exchange=exchange, routing_key=routing_key)
+    def bind_to_exchange(self, exchange, routing_key, **kwargs):
+        self.channel.queue_bind(queue=self.queue_name, exchange=exchange, routing_key=routing_key, **kwargs)
         return self
 
-    def prefetch(self, prefetch_count):
-        self.channel.basic_qos(prefetch_count=prefetch_count)
+    def prefetch(self, prefetch_count, **kwargs):
+        self.channel.basic_qos(prefetch_count=prefetch_count, **kwargs)
         return self
 
     def publish_message(self, exchange_name, routing_key, chain=None, data=None, headers=None, config=None):
