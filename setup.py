@@ -4,7 +4,7 @@ setup(
     name='babex',
     version='1.0.0',
     install_requires=[
-        "aioamqp"
+        "pika"
     ],
     description="Имплементация протокола общения между сервисами, через очередь сообщений RabbitMQ.",
     author='Stepan Pyzhov',

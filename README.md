@@ -38,13 +38,13 @@ Request:
   },
   "chain": [
     {
-      "exchange": "Math",
+      "exchange": "math",
       "key": "sum",
       "isMultiple": false,
       "successful": false
     },
     {
-      "exchange": "Math",
+      "exchange": "math",
       "key": "sum.next",
       "isMultiple": false,
       "successful": false
@@ -56,9 +56,9 @@ Request:
 
 ```python
 import babex
-exchange = 'Math'
+exchange = 'math'
 routing_key = 'sum'
-name = 'Math.sum'
+name = 'math.sum'
 address = "amqp://localhost"
 
 service = babex.new_service(name=name, address=address)
@@ -75,13 +75,13 @@ Result:
   },
   "chain": [
     {
-      "exchange": "Math",
+      "exchange": "math",
       "key": "sum",
       "isMultiple": false,
       "successful": true
     },
     {
-      "exchange": "Math",
+      "exchange": "math",
       "key": "sum.next",
       "isMultiple": false,
       "successful": false

@@ -1,1 +1,1 @@
-aioamqp
+pika

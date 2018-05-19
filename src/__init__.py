@@ -9,7 +9,7 @@ ServiceConfig = {
 }
 
 
-def new_service(**kwargs):
+def new_service(name, address="amqp://localhost", isSingle=True, skipDeclareQueue=False):
     """
     :param name:
     :param address:
@@ -18,4 +18,4 @@ def new_service(**kwargs):
     :param loop:
     :return:
     """
-    return Service(**kwargs).connect()
+    return Service(name, address=address, isSingle=isSingle, skipDeclareQueue=skipDeclareQueue).connect()

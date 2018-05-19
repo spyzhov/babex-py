@@ -6,16 +6,17 @@ except ImportError:
 
 
 class Message(object):
-    def __init__(self, channel, body, envelope, properties):
+    def __init__(self, channel, body, method, properties):
         self.channel = channel
-        self.envelope = envelope
+        self.method = method
         self.payload = json.loads(body.decode())
+        self.data = self.payload.get('data', None)
         self.chain = [Path(item) for item in self.payload.get('chain', [])]
-        self.headers = properties.get('headers', {})
         self.config = self.payload.get('config', None)
+        self.headers = properties.headers or {}
 
-    async def ack(self):
-        await self.channel.basic_client_ack(delivery_tag=self.envelope.delivery_tag)
+    def ack(self):
+        self.channel.basic_ack(delivery_tag=self.method.delivery_tag)
 
     def get_current(self):
         for index, path in enumerate(self.chain):
