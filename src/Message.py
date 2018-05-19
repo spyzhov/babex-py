@@ -18,6 +18,9 @@ class Message(object):
     def ack(self):
         self.channel.basic_ack(delivery_tag=self.method.delivery_tag)
 
+    def nack(self):
+        self.channel.basic_nack(delivery_tag=self.method.delivery_tag)
+
     def get_current(self):
         for index, path in enumerate(self.chain):
             if not path.successful:
