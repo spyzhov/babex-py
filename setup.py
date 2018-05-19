@@ -11,5 +11,5 @@ setup(
     maintainer='Stepan Pyzhov',
     packages=['babex'],
     package_dir={'babex': 'src'},
-    url='https://github.com/Turin-tomsk/babex',
+    url='https://github.com/spyzhov/babex-py',
 )
