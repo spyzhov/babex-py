@@ -1,6 +1,6 @@
 # About
 
-Имплементация протокола общения между сервисами, через очередь сообщений RabbitMQ.
+`Babex` is a modern solution for communications between microservices.
 
 # Versions
 

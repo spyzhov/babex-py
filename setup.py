@@ -2,11 +2,11 @@ from setuptools import setup
 
 setup(
     name='babex',
-    version='1.0.3',
+    version='1.0.4',
     install_requires=[
         "pika"
     ],
-    description="Имплементация протокола общения между сервисами, через очередь сообщений RabbitMQ.",
+    description="`Babex` is a modern solution for communications between microservices.",
     author='Stepan Pyzhov',
     author_email="turin.tomsk@gmail.com",
     maintainer='Stepan Pyzhov',
