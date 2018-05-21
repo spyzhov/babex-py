@@ -6,7 +6,7 @@ setup(
     install_requires=[
         "pika"
     ],
-    description="`Babex` is a modern solution for communications between microservices.",
+    description="Babex is a modern solution for communications between microservices.",
     author='Stepan Pyzhov',
     author_email="turin.tomsk@gmail.com",
     maintainer='Stepan Pyzhov',
