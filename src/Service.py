@@ -48,11 +48,11 @@ class Service:
     def publish_message(self, exchange_name, routing_key, chain=None, data=None, headers=None, config=None):
         self.logger.info(f"publish message to {exchange_name}:{routing_key}")
         chain = chain or []
-        payload = json.dumps({
+        payload = {
             'data': data,
             'chain': [p.__dict__ for p in chain],
             'config': config,
-        })
+        }
         self.channel.basic_publish(
             exchange=str(exchange_name),
             routing_key=str(routing_key),
