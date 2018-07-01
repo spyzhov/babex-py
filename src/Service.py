@@ -25,12 +25,12 @@ class Service:
         super(Service, self).__init__()
 
     def connect(self):
-        self.logger.info(f"Try to connect to {self.address}")
+        self.logger.debug(f"Try to connect to {self.address}")
         self.connection = pika.BlockingConnection(pika.URLParameters(self.address))
         self.channel = self.connection.channel()
         if not self.skipDeclareQueue:
             self.channel.queue_declare(queue=self.queue_name, **self.options)
-        self.logger.info(f"waiting for messages on {self.queue_name}")
+        self.logger.debug(f"waiting for messages on {self.queue_name}")
         return self
 
     def listen(self, callback, **kwargs):
@@ -46,7 +46,7 @@ class Service:
         return self
 
     def publish_message(self, exchange_name, routing_key, chain=None, data=None, headers=None, config=None):
-        self.logger.info(f"publish message to {exchange_name}:{routing_key}")
+        self.logger.debug(f"publish message to {exchange_name}:{routing_key}")
         chain = chain or []
         payload = {
             'data': data,
@@ -83,6 +83,6 @@ class Service:
 
     def __get_callback(self, callback):
         def fn(ch, method, properties, body):
-            self.logger.info("receive message %r" % (body,))
+            self.logger.debug("receive message %r" % (body,))
             return callback(Message(ch, body, method, properties))
         return fn
