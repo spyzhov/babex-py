@@ -90,3 +90,8 @@ Result:
   "config": null
 }
 ```
+
+# Other languages
+
+* Golang - https://github.com/matroskin13/babex
+* Node.js - https://github.com/spyzhov/babex-node
